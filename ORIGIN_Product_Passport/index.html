@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ORIGIN — Product Passport</title>
+<style>
+:root{color-scheme:dark;--bg:#101211;--panel:#191d1a;--line:#343b34;--ink:#f0f3e9;--muted:#acb6a9;--lime:#cbf776}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,sans-serif}button,input{font:inherit}a{color:var(--lime)}header,main,footer{max-width:1200px;margin:auto;padding:24px 32px}header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);gap:16px}.brand{font-weight:900;letter-spacing:.2em;font-size:24px}.brand span{color:var(--lime)}.network{font-size:12px;letter-spacing:.1em;color:var(--lime)}button{border:1px solid var(--line);border-radius:8px;padding:11px 18px;color:var(--ink);background:#262d25;cursor:pointer}button.primary{background:var(--lime);color:#18210d;border-color:var(--lime);font-weight:700}button:disabled{opacity:.45;cursor:not-allowed}button:hover:enabled{filter:brightness(1.1)}:focus-visible{outline:3px solid var(--lime);outline-offset:4px}.hero{padding:42px 0 28px;display:flex;justify-content:space-between;align-items:end;gap:24px}.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--lime);text-transform:uppercase}h1{font-size:clamp(36px,6vw,66px);line-height:1.05;letter-spacing:-.05em;margin:16px 0}h1 em{font-family:Georgia,serif;font-weight:400;color:var(--lime)}p{color:var(--muted)}.hero p{max-width:570px}.total{text-align:right;white-space:nowrap}.total strong{display:block;font-size:42px;color:var(--ink)}.layout{display:grid;grid-template-columns:1.15fr 1fr;gap:24px}.passport,.panel{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel)}.cardtop{display:flex;justify-content:space-between;padding:18px 24px;font-size:12px;letter-spacing:.12em}.visual{height:270px;display:grid;place-items:center;background:radial-gradient(ellipse at center,#495741 0%,#252d23 45%,#191e19 80%);position:relative}.visual img{width:100%;height:100%;object-fit:contain;padding:24px}.visual small{position:absolute;bottom:12px;right:18px;color:#cad6be}.details{padding:24px}.details h2{font-size:28px;margin:0 0 18px}.tag{display:inline-block;color:var(--lime);font-size:12px;border:1px solid #66744f;border-radius:20px;padding:3px 10px}dl{margin:18px 0 0}dt{font-size:11px;color:var(--muted);letter-spacing:.13em;text-transform:uppercase}dd{margin:4px 0 14px;overflow-wrap:anywhere;font-family:monospace;font-size:14px}.panel{padding:24px;margin-bottom:20px}.panel h2{margin:0 0 6px;font-size:21px}.panel p{font-size:14px;margin:4px 0 18px}label{display:block;font-size:13px;margin:14px 0 5px;color:#d4ddce}input{background:#101510;border:1px solid #465044;border-radius:7px;padding:11px;color:var(--ink);width:100%;min-width:0}.row{display:flex;gap:10px;align-items:end}.row input{flex:1}.row button{white-space:nowrap}.panel button[type=submit]{margin-top:16px}.status{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:20px 0;overflow-wrap:anywhere}.status p{margin:0}.status[data-tone=error]{border-color:#f1a094}.status[data-tone=success]{border-color:var(--lime)}#txLink{display:block;margin-top:8px}#txLink[hidden]{display:none}.fine{font-size:12px;color:var(--muted)}footer{border-top:1px solid var(--line);font-size:12px;display:flex;justify-content:space-between;gap:20px}footer a{overflow-wrap:anywhere}ul{padding-left:20px}.steps{font-size:13px;color:var(--muted)}@media(max-width:800px){.layout{grid-template-columns:1fr}.hero{align-items:start}.total{display:none}header,main,footer{padding:20px}.visual{height:240px}footer{flex-direction:column}.brand{font-size:20px}header button{font-size:13px;padding:10px}}
+</style>
+</head>
+<body>
+<header><div><div class="brand">ORIGIN<span>↗</span></div><div class="network">● ETHEREUM SEPOLIA</div></div><button id="connect" class="primary">Connect MetaMask</button></header><div id="connectionState" style="max-width:1200px;margin:8px auto;padding:0 32px;color:#cbf776" role="status">Starting ORIGIN v2… If this stays visible, JavaScript did not start.</div>
+<main>
+<section class="hero"><div><div class="eyebrow">A passport for what you own</div><h1>Every product.<br>A story <em>onchain.</em></h1><p>Register a collectible. Look up its owner. Pass it on with a wallet-approved transfer.</p></div><div class="total"><strong id="total">—</strong><span class="fine">REGISTERED PRODUCTS</span></div></section>
+<div class="layout">
+<section>
+<article class="passport"><div class="cardtop"><span>PRODUCT PASSPORT</span><span id="passportId">NO PRODUCT LOADED</span></div><div class="visual"><img id="productImage" alt="Illustrative sneaker placeholder"><small id="imageCaption">ILLUSTRATION / NOT PRODUCT EVIDENCE</small></div><div class="details"><span class="tag" id="ownership">Awaiting connection</span><h2 id="productName">Your next collectible.</h2><dl><dt>Serial number</dt><dd id="serial">—</dd><dt>Registered owner</dt><dd id="owner">—</dd></dl><a id="ownerLink" target="_blank" rel="noopener noreferrer" hidden>View owner on Etherscan ↗</a></div></article>
+<div class="status" id="statusBox" role="status" aria-live="polite"><p id="status">Connect MetaMask to load product #1 from your contract.</p><a id="txLink" target="_blank" rel="noopener noreferrer" hidden>View transaction ↗</a></div>
+<p class="fine">This passport records wallet ownership. Open registration does not certify a physical product’s authenticity. Product data is public; image URLs refer to external content.</p>
+</section>
+<section aria-label="Passport actions">
+<div class="panel"><h2>01 / Find a passport</h2><p>Look up a product by its blockchain ID.</p><form id="lookupForm"><label for="lookupId">Product ID</label><div class="row"><input id="lookupId" type="text" inputmode="numeric" pattern="[1-9][0-9]*" value="1" required><button type="submit" data-action disabled>Look up ↗</button></div></form></div>
+<div class="panel"><h2>02 / Register a product</h2><p>Create a public passport owned by your connected wallet.</p><form id="registerForm"><label for="name">Product name</label><input id="name" placeholder="Genesis Sneakers" required><label for="serialInput">Unique serial number</label><input id="serialInput" placeholder="GEN-002" required><label for="imageInput">Image URL · optional HTTPS link</label><input id="imageInput" type="url" placeholder="https://example.com/sneaker.jpg"><button type="submit" class="primary" data-action disabled>Create passport ↗</button></form></div>
+<div class="panel"><h2>03 / Transfer ownership</h2><p id="transferHelp">Load a product you own to enable transfer.</p><form id="transferForm"><label for="recipient">Recipient wallet address</label><input id="recipient" placeholder="0x…" required><button id="transferButton" type="submit" data-action disabled>Transfer loaded product ↗</button></form></div>
+</section>
+</div>
+<ul class="steps"><li>Reads do not need a transaction approval.</li><li>Registration and transfers use Sepolia ETH for gas.</li><li>Only the current owner can transfer a loaded product.</li></ul>
+</main>
+<footer><span>ORIGIN / MG3012 · Product Passport</span><a id="contractLink" target="_blank" rel="noopener noreferrer">View deployed contract ↗</a></footer>
+<script>
+window.addEventListener('error', function(event) {
+ const text = 'Page error: ' + event.message;
+ document.getElementById('status').textContent = text;
+ document.getElementById('connectionState').textContent = text;
+});
+window.addEventListener('unhandledrejection', function(event) {
+ const text = 'Connection error: ' + (event.reason?.message || event.reason);
+ document.getElementById('status').textContent = text;
+ document.getElementById('connectionState').textContent = text;
+});
+(async function () {
+const $ = id => document.getElementById(id);
+const ADDRESS = '0xf5ac331361d5bd1ad7d40ab891c58717f9f486ed';
+const EXPLORER = 'https://sepolia.etherscan.io';
+const ABI = [
+ 'function registerProduct(string name,string serialNumber,string imageUrl) returns (uint256)',
+ 'function getProduct(uint256 productId) view returns (tuple(string name,string serialNumber,string imageUrl,address owner))',
+ 'function transferOwnership(uint256 productId,address newOwner)',
+ 'function getProductCount() view returns (uint256)',
+ 'event ProductRegistered(uint256 indexed productId,string name,address indexed owner)',
+ 'event OwnershipTransferred(uint256 indexed productId,address indexed previousOwner,address indexed newOwner)'
+];
+let ethers, provider, contract, account, loadedId, loadedProduct, busy = false;
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300"><ellipse cx="300" cy="235" rx="205" ry="18" fill="#111" opacity=".4"/><path d="M116 192 L142 110 Q150 91 168 114 L219 151 287 143 333 173 450 189 Q481 193 489 218 L477 237 124 237 Q101 228 116 192" fill="#e9e9d7"/><path d="M130 215 L484 215 477 237 124 237Z" fill="#b8d975"/><path d="M218 151 L287 143 333 173 274 194Z" fill="#718465"/><path d="M243 156 L276 170 M254 150 L289 166 M272 150 L301 165" stroke="#f4f5e6" stroke-width="7" stroke-linecap="round"/><path d="M143 121 L175 155 147 193 119 193Z" fill="#b4c4a1"/><path d="M325 185 L405 199 348 207 286 195Z" fill="#263629"/></svg>`;
+const placeholder = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+$('productImage').src = placeholder;
+$('contractLink').href = `${EXPLORER}/address/${ADDRESS}`;
+function message(text,tone=''){ $('status').textContent=text; $('connectionState').textContent=text; $('statusBox').dataset.tone=tone; }
+function controls(){
+ document.querySelectorAll('[data-action]').forEach(b=>b.disabled=busy||!contract);
+ $('connect').disabled=busy;
+ const owned=loadedProduct&&account&&loadedProduct.owner.toLowerCase()===account.toLowerCase();
+ $('transferButton').disabled=busy||!contract||!owned;
+ $('transferHelp').textContent=owned ? `Transfer product #${loadedId}. Check the recipient carefully before approving.` : 'Load a product you own to enable transfer.';
+}
+function errorText(e){
+ if(e.code===-32002)return 'A wallet request is already pending. Open the MetaMask extension and approve or reject it.';
+ if(e.code===4001||e.code==='ACTION_REJECTED')return 'Request cancelled in MetaMask. No new transaction was submitted.';
+ return e.reason||e.shortMessage||e.message||'Request failed. Please try again.';
+}
+function validId(text){ if(!/^[1-9]\d*$/.test(text))throw Error('Enter a positive whole product ID.'); const id=BigInt(text);if(id>=2n**256n)throw Error('Product ID is too large.');return id; }
+function clearProduct(){loadedId=undefined;loadedProduct=undefined;$('productName').textContent='No passport loaded';$('serial').textContent='—';$('owner').textContent='—';$('passportId').textContent='NO PRODUCT LOADED';$('ownership').textContent='Look up a product';$('ownerLink').hidden=true;$('productImage').src=placeholder;$('imageCaption').textContent='ILLUSTRATION / NOT PRODUCT EVIDENCE';}
+async function loadProduct(id){
+ clearProduct();
+ const p=await contract.getProduct(id);loadedId=id;loadedProduct=p;
+ $('passportId').textContent='ID / '+id.toString().padStart(4,'0');$('productName').textContent=p.name;$('serial').textContent=p.serialNumber;$('owner').textContent=p.owner;
+ $('ownership').textContent=p.owner.toLowerCase()===account.toLowerCase()?'Owned by your wallet':'Registered on Sepolia';
+ $('ownerLink').href=`${EXPLORER}/address/${p.owner}`;$('ownerLink').hidden=false;
+ try{const url=new URL(p.imageUrl);if(url.protocol==='https:'){$('productImage').src=url.href;$('productImage').alt=p.name;$('imageCaption').textContent='REGISTRANT-SUPPLIED IMAGE';}}catch{}
+ $('lookupId').value=id.toString();
+}
+$('productImage').onerror=()=>{$('productImage').src=placeholder;$('productImage').alt='Illustrative sneaker placeholder';$('imageCaption').textContent='IMAGE UNAVAILABLE / ILLUSTRATION';};
+async function task(fn){if(busy)return;busy=true;controls();try{await fn();}catch(e){message(errorText(e),'error');}finally{busy=false;controls();}}
+async function checkNetwork(){if((await provider.getNetwork()).chainId!==11155111n)throw Error('Switch MetaMask to Ethereum Sepolia and reconnect.');}
+$('connect').onclick=()=>task(async()=>{
+ if(location.protocol==='file:')throw Error('Open this page using VS Code Live Server, then visit its http://127.0.0.1 address in Chrome.');
+ if(!ethers)throw Error('ethers.js has not loaded. Check your internet connection, wait a moment, then reload.');
+ contract=undefined;clearProduct();$('total').textContent='—';$('connect').textContent='Connect MetaMask';
+ if(!window.ethereum)throw Error('Install MetaMask in this browser, then reload this page.');
+ message('Approve the connection in MetaMask…');
+ message('Choose the account to connect in MetaMask. Select only Account 2 to switch to it.');
+ await window.ethereum.request({method:'wallet_requestPermissions',params:[{eth_accounts:{}}]});
+ const accounts = await window.ethereum.request({method:'eth_accounts'});
+ if(!accounts.length)throw Error('No account selected. Connect an account in MetaMask.');
+ message('Wallet authorized. Checking Sepolia…');
+ const chain=await window.ethereum.request({method:'eth_chainId'});
+ if(chain!=='0xaa36a7')await window.ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId:'0xaa36a7'}]});
+ provider=new ethers.BrowserProvider(window.ethereum);await checkNetwork();
+ if(await provider.getCode(ADDRESS)==='0x')throw Error('No contract found at the configured Sepolia address.');
+ const signer=await provider.getSigner(accounts[0]);account=await signer.getAddress();
+ const candidate=new ethers.Contract(ADDRESS,ABI,signer);
+ message('Wallet connected. Reading registered products from Sepolia…');
+ const count=await candidate.getProductCount();contract=candidate;
+ $('connect').textContent=account.slice(0,6)+'…'+account.slice(-4);$('connect').title=account;$('total').textContent=count.toString();
+ if(count>0n)await loadProduct(1n);
+ message('Connected to Sepolia. Your passport data is live.','success');
+});
+$('lookupForm').onsubmit=e=>{e.preventDefault();task(async()=>{await checkNetwork();message('Reading passport…');await loadProduct(validId($('lookupId').value.trim()));message('Passport loaded from Sepolia.','success');});};
+async function submitTransaction(send,after){
+ await checkNetwork();$('txLink').hidden=true;message('Review and confirm the transaction in MetaMask…');
+ const tx=await send();$('txLink').href=`${EXPLORER}/tx/${tx.hash}`;$('txLink').textContent='View transaction: '+tx.hash;$('txLink').hidden=false;
+ message('Submitted. Waiting for blockchain confirmation…');
+ const receipt=await tx.wait();
+ message('Transaction confirmed. Updating passport…','success');
+ try{await after(receipt);message('Transaction confirmed. Passport updated.','success');}catch{message('Transaction confirmed, but the display could not refresh. Reconnect or look up the product again.','success');}
+}
+$('registerForm').onsubmit=e=>{e.preventDefault();task(async()=>{
+ const name=$('name').value.trim(),serial=$('serialInput').value.trim(),image=$('imageInput').value.trim();
+ const bytes=s=>new TextEncoder().encode(s).length;
+ if(!name||bytes(name)>80)throw Error('Product name must be 1–80 UTF-8 bytes.');
+ if(!serial||bytes(serial)>64)throw Error('Serial number must be 1–64 UTF-8 bytes.');
+ if(bytes(image)>300)throw Error('Image URL must be at most 300 UTF-8 bytes.');
+ if(image&&new URL(image).protocol!=='https:')throw Error('Use an HTTPS image URL, or leave it empty.');
+ await submitTransaction(()=>contract.registerProduct(name,serial,image),async receipt=>{
+ let id;for(const log of receipt.logs){if(log.address.toLowerCase()!==ADDRESS)continue;try{const event=contract.interface.parseLog(log);if(event?.name==='ProductRegistered')id=event.args.productId;}catch{}}
+ $('total').textContent=(await contract.getProductCount()).toString();if(id===undefined)throw Error('Registration event unavailable');await loadProduct(id);$('registerForm').reset();
+ });
+});};
+$('transferForm').onsubmit=e=>{e.preventDefault();task(async()=>{
+ if(!loadedId||!loadedProduct)throw Error('Load a passport first.');
+ const id=loadedId,recipient=$('recipient').value.trim();
+ if(!ethers.isAddress(recipient)||recipient.toLowerCase()===ethers.ZeroAddress)throw Error('Enter a valid, nonzero Ethereum wallet address.');
+ const current=await contract.getProduct(id);
+ if(current.owner.toLowerCase()!==account.toLowerCase())throw Error('Only the current owner can transfer this product.');
+ if(recipient.toLowerCase()===account.toLowerCase())throw Error('Choose a different recipient wallet.');
+ await submitTransaction(()=>contract.transferOwnership(id,recipient),async()=>{await loadProduct(id);$('transferForm').reset();});
+});};
+if(window.ethereum && typeof window.ethereum.on==='function'){window.ethereum.on('accountsChanged',()=>{if(!busy)location.reload();});window.ethereum.on('chainChanged',()=>location.reload());}
+if(location.protocol==='file:')message('You opened a local file. In VS Code, right-click index.html and choose Open with Live Server. Open that localhost URL in Chrome to connect MetaMask.','error');
+message(location.protocol==='file:' ? 'Use Live Server and open the localhost URL in Chrome.' : 'ORIGIN v2 ready. Click Connect MetaMask to load your passport.');
+try {
+ ({ethers}=await Promise.race([
+  import('https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js'),
+  new Promise((_,reject)=>setTimeout(()=>reject(Error('Library download timed out')),12000))
+ ]));
+ controls();
+} catch(e) {
+ message('Could not load ethers.js: '+e.message+'. Check your internet connection and reload.','error');controls();
+}
+})().catch(e=>{document.getElementById('connectionState').textContent='Startup failed: '+e.message;document.getElementById('status').textContent='Startup failed: '+e.message;});
+</script>
+</body>
+</html>
+
+
+
+
+
