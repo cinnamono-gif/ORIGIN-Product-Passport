@@ -85,3 +85,11 @@ These hashes were transcribed from the supplied confirmation screenshots. The op
 ## Scope and limitations
 
 Anyone may register a product. The passport records ownership within this contract; it does not establish physical authenticity, legal title, or an ERC-721 NFT. Product fields and wallet addresses are public. Image files remain on external servers and may become unavailable; an illustrative sneaker is used when an image is absent or fails to load. Transfers change the onchain owner and require careful recipient address entry.
+
+## Bonus Etherscan source verification
+
+The deployed ProductPassport contract is marked **Source Code Verified — Exact Match** on Etherscan Sepolia. The verified compiler version shown by the explorer is **v0.8.34+commit.80d5c536**, with optimization disabled. The Solidity source pragma `^0.8.24` permits this compiler version.
+
+[View verified contract source](https://sepolia.etherscan.io/address/0xf5ac331361d5bd1ad7d40ab891c58717f9f486ed#code)
+
+Evidence: `screenshots/10-etherscan-source-verified.png`.
